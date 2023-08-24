@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-MONGO = True
+
 
 cluster = MongoClient("mongodb+srv://admin:vDFk9UU5UhJ8FA10@movie-rec-data.l2nnka0.mongodb.net/")
 db = cluster["main_movie_data"]

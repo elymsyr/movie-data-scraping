@@ -3,7 +3,10 @@ from scrapy.utils.project import get_project_settings
 from docs.mongo_crawl import clearDb
 from docs.mongo_find import MongoConnectionFinder
 import argparse
+import datetime
 from os import system
+current_time = datetime.datetime.now()
+print(f"{current_time.hour}:{current_time.minute}")
 
 def finder():
     process = CrawlerProcess(get_project_settings())
@@ -38,7 +41,7 @@ if __name__ == '__main__':
     crawl = config['x']
     dele = config['l'] 
     if find:
-        finder()
+        finder()         
     elif checker:
         check()
     elif crawl:

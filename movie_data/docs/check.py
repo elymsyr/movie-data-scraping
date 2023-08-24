@@ -3,8 +3,6 @@ from mongo_crawl import find_all, clearDb
 
 def check():
     connection = MongoConnectionFinder()
-    connection.clearDb()
-    clearDb()
     urls = find_all()
     read = 0
     more = 0
@@ -26,6 +24,11 @@ def check():
             more += 1
     print(f"\nMOVIES:\nCOUNTED --> {read}\nMORE --> {more}")
 
+def clear():
+    connection = MongoConnectionFinder()
+    connection.clearDb()
+    clearDb()
 
 
+# clear()
 check()

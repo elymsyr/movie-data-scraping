@@ -15,7 +15,7 @@ class FinderSpider(CrawlSpider):
     start_urls = urls
     print(f"\n\n\nSTARTING {len(start_urls)}")
     new = 0
-    rules = (Rule(LinkExtractor(allow=r"benzer/"), callback="parse_item", follow=True),)
+    rules = (Rule(LinkExtractor(allow=r"benzer/", unique=True), callback="parse_item", follow=True),)
 
     def parse_item(self, response):
         movies = response.css('div.item-name')

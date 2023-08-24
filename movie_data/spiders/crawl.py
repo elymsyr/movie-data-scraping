@@ -61,10 +61,15 @@ class CrawlSpider(scrapy.Spider):
             if data == 'Anahtar kelime:':
                 item['key'] = self.make_list(clear_data[number+1])
         if item['name'] == '' or item['name'] == None:
-            item['name'] = response.xpath('//div[@class="name-c"]/span').extract_first().strip()
+            new_name = response.xpath('//div[@class="name-c"]/span').extract_first().strip()
+            item['name'] = self.remove_html(new_name)
         data = [item['url'], item['name'], item['genre'], item['country'], item['duration'], item['promotion'], item['style'], item['audience'], item['story'], item['time'], item['key'], item['watched']]
         insert(data)
         self.connection.update_state(data[0][21:])
+    
+    def remove_html(self, string):
+        regex = re.compile(r'<[^>]+>')
+        return regex.sub('', string)
         
     def clean_text(self, raw_html):
         cleantext = re.sub(re.compile('<.*?>'), '', raw_html)
@@ -78,6 +83,3 @@ class CrawlSpider(scrapy.Spider):
             for i in range(len(item)):
                 item[i] = item[i].strip()
             return item
-            
-        
-        # self.connection.update_state(response.url[21:])
