@@ -33,8 +33,10 @@ class MongoConnectionFinder():
             return 1
 
     def clearDb(self):
-        # self.collection.delete_many({})
+        self.collection.delete_many({'url':'https://tarzifilm.comNone'})
         self.collection.delete_many({'url':'None'})
+    def clearDb_all(self):
+        self.collection.delete_many({})    
 
     def update_state(self, url):
         self.collection.update_one({'url': url}, {"$set":{'crawled': 1}})

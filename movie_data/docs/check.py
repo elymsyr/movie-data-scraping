@@ -1,9 +1,14 @@
 from mongo_find import MongoConnectionFinder
-from mongo_crawl import find_all, clearDb
+from mongo_crawl import MongoConnectionCrawler
 
 def check():
-    connection = MongoConnectionFinder()
-    urls = find_all()
+    connectionone_one = MongoConnectionFinder()
+    connectionone_one.clearDb()
+    connection_two = MongoConnectionCrawler()
+    connection_two.clearDb()
+    connection_one = MongoConnectionFinder()
+    connection_two = MongoConnectionFinder()
+    urls = connection_two.find_all()
     read = 0
     more = 0
     for url in urls:
@@ -13,7 +18,7 @@ def check():
             print(f"Error -{number}-> {url}")
             more += 1
     print(f"\nCRAWLED:\nCOUNTED --> {read}\nMORE --> {more}")
-    urls = connection.find_all()
+    urls = connection_one.find_all()
     read = 0
     more = 0
     for url in urls:
@@ -23,12 +28,3 @@ def check():
             print(f"Error -{number}-> {url}")
             more += 1
     print(f"\nMOVIES:\nCOUNTED --> {read}\nMORE --> {more}")
-
-def clear():
-    connection = MongoConnectionFinder()
-    connection.clearDb()
-    clearDb()
-
-
-# clear()
-check()
